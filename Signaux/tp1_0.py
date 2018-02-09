@@ -35,26 +35,26 @@ class Sinusoide:
         
         return sig_t, sig_s
 
+class Plot:
+    def leg(self,a, f, fe, nT, name):
+        if a<0:
+            a=a*-1
+        str1=""+name+": a="+str(a)+" f="+str(f)+" fe="+str(fe)
+        return str1
 
-
-def leg(a, f, fe, nT, name):
-    if a<0:
-        a=a*-1
-    str1=""+name+": a="+str(a)+" f="+str(f)+" fe="+str(fe)
-    return str1
-
-def plot(inx, iny, title, labell,format='o'):
-    plt.plot(inx,iny,format,label=labell)
-    plt.xlabel('time (s)')
-    plt.ylabel('voltage (V)')
-    plt.title(title)
-    #plt.ylim([-1.2, +1.2])
-    plt.grid(True)
+    def plot(self,inx, iny, title, labell,format='o'):
+        plt.plot(inx,iny,format,label=labell)
+        plt.xlabel('time (s)')
+        plt.ylabel('voltage (V)')
+        plt.title(title)
+        #plt.ylim([-1.2, +1.2])
+        plt.grid(True)
 
     
 if __name__ == '__main__':
     s = Sinusoide(2,50.0,1000.0,2)
+    p = Plot()
     x,y=s.make_sin()
-    plot(x,y,"Une sinusoide ...")
+    p.plot(x,y,"Une sinusoide ...")
     
     plt.show()

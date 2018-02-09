@@ -13,7 +13,7 @@ import numpy as np
 from blaze.expr.expressions import label
 
 
-class Trinagle:
+class Triangle:
 
     def __init__(self, a=1.0, ph=0, f=440.0, fe=8000.0, nT=1):
         self.a=a
@@ -37,8 +37,9 @@ class Trinagle:
     
   
 if __name__ == '__main__':
-    t = Trinagle(3,f=50.0,fe=300.0,nT=2)
+    t = Triangle(3,f=50.0,fe=300.0,nT=2)
+    p = tp1_0.Plot()
     x,y=t.make_sin()
-    tp1_0.plot(x, y,"Un signal triangle", tp1_0.leg(t.a, t.f, t.fe, t.nT, "SC"), "-bo")
+    p.plot(x, y,"Un signal triangle",p.leg(t.a, t.f, t.fe, t.nT, "SC"), "-bo")
     plt.legend()
     plt.show()

@@ -35,7 +35,8 @@ class DentDeScie:
   
 if __name__ == '__main__':
     dent = DentDeScie(2,f=50.0,fe=1000.0,nT=2)
+    p = tp1_0.Plot()
     x,y=dent.make_sin()
-    tp1_0.plot(x, y,"Un signal dent de scie", tp1_0.leg(dent.a, dent.f, dent.fe, dent.nT, "SC"), "-bo")
+    p.plot(x, y,"Un signal dent de scie", p.leg(dent.a, dent.f, dent.fe, dent.nT, "SC"), "-bo")
     plt.legend()
     plt.show()

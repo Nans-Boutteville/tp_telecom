@@ -36,8 +36,8 @@ if __name__ == '__main__':
     y=sig_s
     """
     c = Carre(3,f=50.0,fe=300.0,nT=3)
+    p = tp1_0.Plot()
     x,y=c.make_sin()
-    #tp1_1.plot(x, y, tp1_1.leg(3, 50.0, 1000.0, 3, "SC"), "-bo")
-    tp1_0.plot(x, y,"un signal carré", tp1_0.leg(c.a, c.f, c.fe, c.nT, "SC"), "-bo")
+    p.plot(x, y,"un signal carré", p.leg(c.a, c.f, c.fe, c.nT, "SC"), "-bo")
     plt.legend()
     plt.show()
