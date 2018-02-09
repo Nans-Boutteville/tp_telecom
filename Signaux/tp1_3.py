@@ -8,52 +8,34 @@ Created on 6 févr. 2018
 
 import math
 import matplotlib.pyplot as plt
-import Signaux.tp1_1 as tp1_1
-import Signaux.tp1_2 as tp1_2
-#from scipy.signal.waveforms import sawtooth, square
-import numpy as np 
-from blaze.expr.expressions import label
-"""
-ph = phase a l'origine
-sig_t = valeurs dans l'absisses x
-sig_s = valeurs dans l'ordonn�e y
-N = la periode entre chaque point (temps max/frequence)
-te = la periode en seconde que l'on veut evaluer
-fe = la periode en milisecode que l'on veut evaluer
-t = temps
-omega = la pulsation en radian
-a = l'amplitude 
-f= frequence
-"""
-def make_sin(a=1.0, ph=0, f=440.0, fe=8000.0, nT=3):
-    """
-    Create a synthetic 'square wave'
-    First version : use classic Python lists
-    """
-    make_sin.frequence = f
-    make_sin.fe = fe
-    omega = 2*math.pi*f
-    N = int(fe/f)
-    te = 1.0/fe
-    sig_t = [] 
-    sig_s = []
-    for i in range(N*nT):
-        t = te*i
-        sig_t.append(t)
-        #sig_s.append(2*((t/(1/f))-np.floor((t/(1/f))-(1/2))))
-        #sig_s.append(2*a*((t/(1/f))-math.fabs(t/(1/f))-(1/2)))
-        #sig_s.append(2*((t/(1/f))-np.floor((t/(1/f))+(1/2))))
-        sig_s.append(2*a*((t/(1/f))-math.floor((t/(1/f)))-(0.5)))
-    return sig_t, sig_s
+import Signaux.tp1_0 as tp1_0
+
+class DentDeScie:
+
+    def __init__(self, a=1.0, ph=0, f=440.0, fe=8000.0, nT=1):
+        self.a=a
+        self.ph=ph
+        self.f=f
+        self.fe=fe
+        self.nT=nT
+        
+    def make_sin(self):
+        omega = 2*math.pi*self.f
+        N = int(self.fe/self.f)
+        te = 1.0/self.fe
+        sig_t = [] 
+        sig_s = []
+        for i in range(N*self.nT):
+            t = te*i
+            sig_t.append(t)
+            sig_s.append(2*self.a*((t/(1/self.f))-math.floor((t/(1/self.f)))-(0.5)))
+        return sig_t, sig_s
+
     
   
 if __name__ == '__main__':
-    """ 
-    x=sig_t
-    y=sig_s1
-    """
-    x,y=make_sin(2,f=50.0,fe=1000.0,nT=2)
-    #plot2(x,y,"Un signal dent de scie","s1","-bo")
-    tp1_1.plot(x, y,"Un signal dent de scie", tp1_1.leg(2, 50.0, 1000.0, 2, "SC"), "-bo")
+    dent = DentDeScie(2,f=50.0,fe=1000.0,nT=2)
+    x,y=dent.make_sin()
+    tp1_0.plot(x, y,"Un signal dent de scie", tp1_0.leg(dent.a, dent.f, dent.fe, dent.nT, "SC"), "-bo")
     plt.legend()
     plt.show()

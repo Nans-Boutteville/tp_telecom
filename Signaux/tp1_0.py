@@ -13,26 +13,38 @@ import matplotlib.pyplot as plt
 #from scipy.signal.waveforms import sawtooth, square
 import numpy as np 
 
-def make_sin(a=1.0, ph=0, f=440.0, fe=8000.0, nT=1):
-    """
-    Create a synthetic 'sine wave'
-    First version : use classic Python lists
-    N : 
-    """
-    omega = 2*math.pi*f
-    N = int(fe/f)
-    te = 1.0/fe
-    sig_t = [] 
-    sig_s = []
-    for i in range(N*nT):
-        t = te*i
-        sig_t.append(t)
-        sig_s.append(a*math.sin((omega*t)+ph))
-        
-    return sig_t, sig_s
+class Sinusoide:
 
-def plot(inx, iny, title, format='-bo'):
-    plt.plot(inx,iny,format)
+    def __init__(self, a=1.0, ph=0, f=440.0, fe=8000.0, nT=1):
+        self.a=a
+        self.ph=ph
+        self.f=f
+        self.fe=fe
+        self.nT=nT
+        
+    def make_sin(self):
+        omega = 2*math.pi*self.f
+        N = int(self.fe/self.f)
+        te = 1.0/self.fe
+        sig_t = [] 
+        sig_s = []
+        for i in range(N*self.nT):
+            t = te*i
+            sig_t.append(t)
+            sig_s.append(self.a*math.sin((omega*t)+self.ph))
+        
+        return sig_t, sig_s
+
+
+
+def leg(a, f, fe, nT, name):
+    if a<0:
+        a=a*-1
+    str1=""+name+": a="+str(a)+" f="+str(f)+" fe="+str(fe)
+    return str1
+
+def plot(inx, iny, title, labell,format='o'):
+    plt.plot(inx,iny,format,label=labell)
     plt.xlabel('time (s)')
     plt.ylabel('voltage (V)')
     plt.title(title)
@@ -41,7 +53,8 @@ def plot(inx, iny, title, format='-bo'):
 
     
 if __name__ == '__main__':
-    x,y=make_sin(2,f=50.0,fe=1000.0,nT=2)
+    s = Sinusoide(2,50.0,1000.0,2)
+    x,y=s.make_sin()
     plot(x,y,"Une sinusoide ...")
     
     plt.show()
