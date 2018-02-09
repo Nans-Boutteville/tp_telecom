@@ -38,7 +38,10 @@ def make_sin(a=1.0, ph=0, f=440.0, fe=8000.0, nT=1):
     for i in range(N*nT):
         t = te*i
         sig_t.append(t)
-        sig_s.append(a*np.sign(math.sin((omega*t)+ph)))
+        #sig_s.append(a*np.sign(math.sin((omega*t)+ph)))
+        #sig_s.append(a*(2*math.floor(f*t)-math.floor(2*f*t)+1))
+        #sig_s.append((-1)*math.exp(math.floor(f*t)))
+        sig_s.append(2 * a * (2.0 * math.floor(f * t) - math.floor(2.0 * f * t) + 1) - a)
         
     return sig_t, sig_s
 
@@ -82,8 +85,8 @@ if __name__ == '__main__':
     x=sig_t
     y=sig_s
     """
-    x,y=make_sin(3,f=50.0,fe=300.0,nT=3)
-    #tp1_1.plot(x,y,"Un signal carre","s1","-bo")
-    plot2(x,y,"Un signal carre","s1","-bo")
+    x,y=make_sin(3,f=50.0,fe=1000.0,nT=3)
+    #tp1_1.plot(x, y, tp1_1.leg(3, 50.0, 1000.0, 3, "SC"), "-bo")
+    tp1_1.plot(x, y,"un signal carré", tp1_1.leg(3, 50.0, 1000.0, 3, "SC"), "-bo")
     plt.legend()
     plt.show()

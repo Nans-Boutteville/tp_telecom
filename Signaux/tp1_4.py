@@ -40,10 +40,7 @@ def make_sin(a=1.0, ph=0, f=440.0, fe=8000.0, nT=3):
     for i in range(N*nT):
         t = te*i
         sig_t.append(t)
-        #sig_s.append(2*((t/(1/f))-np.floor((t/(1/f))-(1/2))))
-        #sig_s.append(2*a*((t/(1/f))-math.fabs(t/(1/f))-(1/2)))
-        #sig_s.append(2*((t/(1/f))-np.floor((t/(1/f))+(1/2))))
-        sig_s.append(2*a*((t/(1/f))-math.floor((t/(1/f)))-(0.5)))
+        sig_s.append(a*(4*math.fabs((t/(1/f))-np.floor((t/(1/f))+0.5))-1.0))
     return sig_t, sig_s
     
   
@@ -52,8 +49,8 @@ if __name__ == '__main__':
     x=sig_t
     y=sig_s1
     """
-    x,y=make_sin(2,f=50.0,fe=1000.0,nT=2)
+    x,y=make_sin(3,f=50.0,fe=1000.0,nT=2)
     #plot2(x,y,"Un signal dent de scie","s1","-bo")
-    tp1_1.plot(x, y,"Un signal dent de scie", tp1_1.leg(2, 50.0, 1000.0, 2, "SC"), "-bo")
+    tp1_1.plot(x, y,"Un signal triangle", tp1_1.leg(3, 50.0, 1000.0, 2, "SC"), "-bo")
     plt.legend()
     plt.show()
