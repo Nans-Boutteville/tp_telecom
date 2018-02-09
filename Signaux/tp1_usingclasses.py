@@ -5,7 +5,6 @@ Created on 9 févr. 2018
 '''
 import math
 import matplotlib.pyplot as plt
-#from scipy.signal.waveforms import sawtooth, square
 import numpy as np 
 
 class GraphBase:
@@ -46,3 +45,5 @@ class GraphBase:
             sig_s.append(self.func(t))
         
         return sig_t, sig_s
+    
+    
