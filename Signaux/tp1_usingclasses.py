@@ -30,9 +30,13 @@ class GraphBase:
         plt.title(title)
         plt.grid(True)
         
-    def func(self,t):
+    def func_scal(self,t):
         omega = 2*math.pi*self.f
         return self.a*math.sin((omega*t)+self.ph)
+    
+    def func_vect(self,t):
+        omega = 2*np.pi*self.f
+        return self.a*np.sin((omega*t)+self.ph)
         
     def make_sin(self):
         N = int(self.fe/self.f)
@@ -42,7 +46,7 @@ class GraphBase:
         for i in range(N*self.nT):
             t = te*i
             sig_t.append(t)
-            sig_s.append(self.func(t))
+            sig_s.append(self.func_scal(t))
         
         return sig_t, sig_s
     

@@ -18,13 +18,29 @@ class DentDeScie(base.GraphBase):
     def __init__(self, a, f, fe, nT, ph=0):
         base.GraphBase.__init__(self,a,f,fe,nT,ph)
         
-    def func(self,t):
+    def func_scal(self,t):
         return 2*self.a*((t/(1/self.f))-math.floor((t/(1/self.f)))-(0.5))
+    
+    def func_vect(self,t):
+        return 2*self.a*((t/(1/self.f))-np.floor((t/(1/self.f)))-(0.5))
+    
+    def make_sawtooth(self):
+        N = int(self.fe/self.f)
+        te = 1.0/self.fe
+        sig_t = [] 
+        sig_s = []
+        for i in range(N*self.nT):
+            t = te*i
+            sig_t.append(t)
+            sig_s.append(self.func_vect(t))
+        
+        return sig_t, sig_s
+    
     '''
-    Signal de 50Hz sur 1000Hz pour 0.040s
+    Signal de 50Hz sur 1000Hz pour 0.039s
     '''
     def gen(self):
-        t = np.linspace(0, 0.040, 1000)
+        t = np.linspace(0, 0.039, 1000)
         plt.plot(t, sawtooth(2 * np.pi * 50 * t))
 
 if __name__ == '__main__':
@@ -32,13 +48,16 @@ if __name__ == '__main__':
     '''
     Utilisation des bibliotheques
     '''
-    dent.gen()
+    #dent.gen()
     
     '''
     Methode procedurale
+    Scalaire : make_sin()
+    Vectorielle : make_sawtooth()
     '''
     #x,y=dent.make_sin()
-    #dent.plot(x, y,"Un signal dent de scie", dent.leg("SC"), "-bo")
-    #plt.legend()
+    x,y=dent.make_sawtooth()
+    dent.plot(x, y,"Un signal dent de scie", dent.leg("SC"), "-bo")
+    plt.legend()
     
     plt.show()
