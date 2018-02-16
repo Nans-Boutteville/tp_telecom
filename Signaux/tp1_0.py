@@ -30,7 +30,8 @@ class Sinusoide(base.GraphBase):
         return self.a*np.sin((omega*t)+self.ph)
     
 if __name__ == '__main__':
-    s = Sinusoide(2,50.0,1000.0,nT=2,duree=2)
+    niv = 0.8
+    s = Sinusoide(127.5*niv,440.0,44100.0,nT=2,duree=5)
     #x,y=s.make_sin()
     #x,y=s.make_sin_vect()
     x,y=s.make_sign_vect()
