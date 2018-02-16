@@ -22,25 +22,16 @@ class Carre(base.GraphBase):
     def func_vect(self,t):
         return 2 * self.a * (2.0 * np.floor(self.f * t) - np.floor(2.0 * self.f * t) + 1) - self.a
     
-    def make_square(self):
-        N = int(self.fe/self.f)
-        te = 1.0/self.fe
-        sig_t = [] 
-        sig_s = []
-        for i in range(N*self.nT):
-            t = te*i
-            sig_t.append(t)
-            sig_s.append(self.func_vect(t))
-        
-        return sig_t, sig_s
      
     '''
     Signal de 50Hz sur un echantillan de 300Hz pour 0.058s
+    '''
     '''
     def gen(self):
         t = np.linspace(0, 0.058, 300, endpoint=False)
         plt.plot(t, signal.square(2 * np.pi * 50 * t))
         plt.ylim(-2, 2)
+    '''
     
 if __name__ == '__main__':
     

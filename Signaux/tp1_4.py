@@ -25,25 +25,15 @@ class Triangle(base.GraphBase):
     def func_vect(self,t):
         return self.a*(4*np.fabs((t/(1/self.f))-np.floor((t/(1/self.f))+0.5))-1.0)
     
-    def make_triangle(self):
-        N = int(self.fe/self.f)
-        te = 1.0/self.fe
-        sig_t = [] 
-        sig_s = []
-        for i in range(N*self.nT):
-            t = te*i
-            sig_t.append(t)
-            sig_s.append(self.func_vect(t))
-        
-        return sig_t, sig_s
-    
     '''
     Signal de 50Hz sur 300Hz pour 0.037s
+    '''
     '''
     def gen(self):
         t = np.linspace(0, 0.037, 300)
         plt.plot(t, sawtooth(2 * np.pi * 50 * t, 0.5))
-        
+       
+    ''' 
         
 if __name__ == '__main__':
     t = Triangle(3,f=50.0,fe=300.0,nT=2)

@@ -9,12 +9,13 @@ import numpy as np
 
 class GraphBase:
     
-    def __init__(self, a, f, fe, nT, ph=0):
+    def __init__(self, a, f, fe, nT=None, ph=0, duree=None):
         self.a=a
         self.ph=ph
         self.f=f
         self.fe=fe
         self.nT=nT
+        self.duree=duree
         
     def leg(self, name):
         t=self.a
@@ -30,24 +31,27 @@ class GraphBase:
         plt.title(title)
         plt.grid(True)
         
-    def func_scal(self,t):
-        omega = 2*math.pi*self.f
-        return self.a*math.sin((omega*t)+self.ph)
-    
-    def func_vect(self,t):
-        omega = 2*np.pi*self.f
-        return self.a*np.sin((omega*t)+self.ph)
-        
-    def make_sin(self):
+    def make_sin_scal(self):
         N = int(self.fe/self.f)
         te = 1.0/self.fe
         sig_t = [] 
         sig_s = []
-        for i in range(N*self.nT):
-            t = te*i
-            sig_t.append(t)
-            sig_s.append(self.func_scal(t))
+        if self.nT is not None :
+            for i in range(N*self.nT):
+                t = te*i
+                sig_t.append(t)
+                sig_s.append(self.func_scal(t))
         
         return sig_t, sig_s
     
+    def make_sign_vect(self):
+        N = int(self.fe/self.f)
+        te = 1.0/self.fe
+        sig_t = [] 
+        sig_s = []
+        if self.duree is not None :
+            sig_t = np.linspace(0, self.duree, self.duree*self.f)
+            sig_s = self.func_vect(sig_t)
+        
+        return sig_t, sig_s
     
