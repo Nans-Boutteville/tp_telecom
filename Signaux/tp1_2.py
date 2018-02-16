@@ -13,8 +13,8 @@ import numpy as np
     
 class Carre(base.GraphBase):
 
-    def __init__(self, a, f, fe, nT, ph=0):
-        base.GraphBase.__init__(self,a,f,fe,nT,ph)
+    def __init__(self, a, f, fe, nT=None,duree=None, ph=0):
+        base.GraphBase.__init__(self,a,f,fe,nT=nT,duree=duree,ph=ph)
         
     def func_scal(self,t):
         return 2 * self.a * (2.0 * math.floor(self.f * t) - math.floor(2.0 * self.f * t) + 1) - self.a
@@ -22,7 +22,9 @@ class Carre(base.GraphBase):
     def func_vect(self,t):
         return 2 * self.a * (2.0 * np.floor(self.f * t) - np.floor(2.0 * self.f * t) + 1) - self.a
     
-     
+    def func_scipy(self):
+        return np.linspace(0, self.duree, self.fe, endpoint=False) 
+    
     '''
     Signal de 50Hz sur un echantillan de 300Hz pour 0.058s
     '''

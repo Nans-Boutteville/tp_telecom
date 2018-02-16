@@ -16,14 +16,17 @@ from scipy.signal.waveforms import sawtooth
 
 class Triangle(base.GraphBase):
 
-    def __init__(self, a, f, fe, nT, ph=0):
-        base.GraphBase.__init__(self,a,f,fe,nT,ph)
+    def __init__(self, a, f, fe, nT=None,duree=None, ph=0):
+        base.GraphBase.__init__(self,a,f,fe,nT=nT,duree=duree,ph=ph)
         
     def func_scal(self,t):
         return self.a*(4*math.fabs((t/(1/self.f))-math.floor((t/(1/self.f))+0.5))-1.0)
     
     def func_vect(self,t):
         return self.a*(4*np.fabs((t/(1/self.f))-np.floor((t/(1/self.f))+0.5))-1.0)
+    
+    def func_scipy(self):
+        return np.linspace(0, self.duree, self.fe)
     
     '''
     Signal de 50Hz sur 300Hz pour 0.037s
