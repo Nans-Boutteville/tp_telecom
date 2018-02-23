@@ -41,6 +41,6 @@ if __name__ == '__main__':
     a = 100 
     res = map(add, y1, y2, y3, y4, y5, y6, y7, y8)
     #s.plot(x,y,'Une sinusoïde',s.leg("s1"),'-bo')
-    res.plot(a, res, 'C9', label='melodie')
+    plt.plot(a, res, 'C9', label='melodie')
     plt.legend()
     plt.show()
