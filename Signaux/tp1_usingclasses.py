@@ -31,6 +31,13 @@ class GraphBase:
         plt.title(title)
         plt.grid(True)
         
+    def concat(self, GraphBase):
+        x1,y1 = self.make_sign_vect(self)
+        x2,y2 = GraphBase.make_sign_vect(GraphBase)
+        resX = x1 + self.duree
+        resY = y1 + y2
+        return resX, resY
+        
     def make_sin_scal(self):
         N = int(self.fe/self.f)
         te = 1.0/self.fe
