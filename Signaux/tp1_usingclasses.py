@@ -62,3 +62,44 @@ class GraphBase:
         
         return sig_t, sig_s
     
+    def an_triangle(self, n):
+        if n%2==0 :
+            return 0
+        else : 
+            return 8 * self.a * math.pi**2 * math.fsum(1/((2*n+1)**2)) #Triangle
+            
+    def bn_triangle(self, n):
+        if n%2==0 :
+            return 0
+        else :
+            return 4/(2*n+1)
+        
+    def an_dent(self, n):
+        if n%2==0 :
+            return 0
+        else : 
+            return ((-2 * self.a)/math.pi)
+            
+    def bn_dent(self, n):
+        if n%2==0 :
+            return 0
+        else :
+            return math.fsum(1/n)
+        
+    def an_carre(self, n):
+        if n%2==0 :
+            return 0
+        else : 
+            return ((2 * self.a) / math.pi) * math.fsum(1/((2*n+1)**2)) 
+            
+    def bn_carre(self, n):
+        if n%2==0 :
+            return 0
+        else :
+            return 4/(2*n+1)
+         
+    def make_fourier(self): #triangle
+        sig_t = np.linspace(self.o, self.d, self.fe*self.d)
+        sig_s = sig_t * self.o
+        for n in range (2*7) :
+            sig_s + self.an_triangle(n)*math.cos(2*math.pi*self.f*sig_t*n)
