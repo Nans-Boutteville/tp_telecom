@@ -1,9 +1,4 @@
 '''
-Created on 2 mars 2018
-
-@author: M.Dien
-'''
-'''
 Created on 19 avr. 2016
 @author: menez
 
@@ -148,3 +143,5 @@ if __name__ == '__main__':
     for trame in trames:
         decodageEthernet(trame)
         
+
+
