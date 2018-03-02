@@ -9,13 +9,15 @@ import numpy as np
 
 class GraphBase:
     
-    def __init__(self, a, f, fe, nT=None, ph=0, duree=None):
+    def __init__(self, a, f, fe, nT=None, ph=0, duree=None, o=None, d=None):
         self.a=a
         self.ph=ph
         self.f=f
         self.fe=fe
         self.nT=nT
         self.duree=duree
+        self.o=o
+        self.d=d
         
     def leg(self, name):
         t=self.a
@@ -66,7 +68,7 @@ class GraphBase:
         if n%2==0 :
             return 0
         else : 
-            return 8 * self.a * math.pi**2 * math.fsum(1/((2*n+1)**2)) #Triangle
+            return ((8 * self.a) / np.pi**2) * math.fsum(1/((2*n+1)**2)) #Triangle
             
     def bn_triangle(self, n):
         if n%2==0 :
@@ -78,7 +80,7 @@ class GraphBase:
         if n%2==0 :
             return 0
         else : 
-            return ((-2 * self.a)/math.pi)
+            return ((-2 * self.a)/np.pi)
             
     def bn_dent(self, n):
         if n%2==0 :
@@ -90,7 +92,7 @@ class GraphBase:
         if n%2==0 :
             return 0
         else : 
-            return ((2 * self.a) / math.pi) * math.fsum(1/((2*n+1)**2)) 
+            return ((2 * self.a) / np.pi) * math.fsum(1/((2*n+1)**2)) 
             
     def bn_carre(self, n):
         if n%2==0 :
@@ -102,4 +104,6 @@ class GraphBase:
         sig_t = np.linspace(self.o, self.d, self.fe*self.d)
         sig_s = sig_t * self.o
         for n in range (2*7) :
-            sig_s + self.an_triangle(n)*math.cos(2*math.pi*self.f*sig_t*n)
+            sig_s += self.an_triangle(n)*np.cos(2*np.pi*self.f*sig_t*n)
+
+        return sig_t, sig_s

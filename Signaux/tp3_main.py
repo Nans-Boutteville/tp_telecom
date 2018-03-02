@@ -6,9 +6,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Signaux.tp1_usingclasses as base
 
-class Fourier_Triangle(base.GraphBase):
+class Fourier_Signal(base.GraphBase):
     def __init__(self, a, f, fe, nT=None,duree=None, ph=0, o=0, d=0):
-        base.GraphBase.__init__(self,a,f,fe,nT=nT,duree=duree,ph=ph, o=o, d=d)
+        base.GraphBase.__init__(self,a,f,fe,nT=nT,duree=duree,ph=ph,o=o, d=d)
     
     def make_fourier(self):
         base.GraphBase.make_fourier(self)
@@ -35,17 +35,18 @@ if __name__ == '__main__':
     fe = 3000
     d = 0.01
     f = 1000
-    tri = Fourier_Triangle(3,f=50.0,fe=300.0, duree=10,o = 10, d=15)
-    sTriangle = Fourier_Triangle.make_fourier(tri)
+    #tri = Fourier_Signal(3,f=50.0,fe=300.0, duree=10,o = 10, d=15)
+    tri = Fourier_Signal(3, f=300, fe=1000, duree = 15, o=1, d=5)
+    xT, yT = tri.make_fourier()
         
     plt.subplot(211)
-    plt.plot(t, s1, t, s2)
+    plt.plot(t, xT, t, yT)
     plt.xlim(0, 5)
     plt.xlabel('time')
     plt.ylabel('s1 and s2')
     plt.grid(True)
     
     plt.subplot(212)
-    cxy, f = plt.cohere(s1, sTriangle, 256, 1./dt)
+    cxy, f = plt.cohere(xT, yT, 256, 1./dt)
     plt.ylabel('n')
     plt.show()
